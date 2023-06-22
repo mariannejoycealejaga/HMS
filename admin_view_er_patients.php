@@ -55,8 +55,7 @@ if (isset($_GET[delid])) {
                     </thead>
                     <tbody>
                     <?php
-                    $sql = "SELECT b.patientname, b.address, b.mobileno, a.appointment_date, a.diagnosis, a.history_of_present_illness, a.physical_examination, a.medication_treatment FROM emergency_room_patients a INNER JOIN patient b ON a.patient_case_no=b.patientid";
-                    // $sql = "SELECT * FROM emergency_room_patients INNER JOIN patient ON patient.id=emergency_room_patients.patient_case_no WHERE patient.status='Active'";
+                    $sql = "SELECT b.patientname, b.address, b.mobileno, a.id, a.appointment_date, a.diagnosis, a.history_of_present_illness, a.physical_examination, a.medication_treatment FROM emergency_room_patients a INNER JOIN patient b ON a.patient_case_no=b.patientid";
                     $qsql = mysqli_query($con, $sql);
                     while ($rs = mysqli_fetch_array($qsql)) {
                         echo "<tr>
@@ -72,7 +71,7 @@ if (isset($_GET[delid])) {
         
         <td align='center'>";
                         if (isset($_SESSION[adminid])) {
-                            echo "<a href='admin_emergency_room.php.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-cyan'>Edit</a>
+                            echo "<a href='edit_opd_details.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-cyan'>Edit</a>
                             <a href='admin_view_er_patients.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-blush2'>Delete</a>
                             <a href='admin_print_OPD.php?patientid=$rs[patientid]' class='btn btn-sm btn-raised'>Print Report</a>";
                         }
