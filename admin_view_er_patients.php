@@ -55,18 +55,19 @@ if (isset($_GET[delid])) {
                     </thead>
                     <tbody>
                     <?php
-                    $sql = "SELECT * FROM emergency_room_patients";
+                    $sql = "SELECT b.patientname, b.address, b.mobileno, a.appointment_date, a.diagnosis, a.history_of_present_illness, a.physical_examination, a.medication_treatment FROM emergency_room_patients a INNER JOIN patient b ON a.patient_case_no=b.patientid";
+                    // $sql = "SELECT * FROM emergency_room_patients INNER JOIN patient ON patient.id=emergency_room_patients.patient_case_no WHERE patient.status='Active'";
                     $qsql = mysqli_query($con, $sql);
                     while ($rs = mysqli_fetch_array($qsql)) {
                         echo "<tr>
-        <td>$rs[patient_name]</td>
-        <td>$rs[appointment_date]</td>
-        <td>$rs[diagnosis]</td>
-        <td>$rs[address]</td>
-        <td>$rs[contact_no]</td>
-        <td>$rs[present_illness]</td>
-        <td>$rs[physical_examination]</td>
-        <td>$rs[medication_treatment]</td>
+                        <td>$rs[patientname]</td>
+                        <td>$rs[appointment_date]</td>
+                        <td>$rs[diagnosis]</td>
+                        <td>$rs[address]</td>
+                        <td>$rs[mobileno]</td>
+                        <td>$rs[history_of_present_illness]</td>
+                        <td>$rs[physical_examination]</td>
+                        <td>$rs[medication_treatment]</td>
         
         
         <td align='center'>";

@@ -3,11 +3,8 @@
 include("adheader.php");
 include("dbconnection.php");
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $patient_case_no = $_POST['patient_case_no'];
-    $patient_name = $_POST['patient_name'];
-    $address = $_POST['address'];
+    $patient_case_no = $_POST['patient_id'];
     $chief_complaint = $_POST['chief_complaint'];
-    $mobile_no = $_POST['mobile_no'];
     $history_of_present_illness = $_POST['history_of_present_illness'];
     $blood_pressure = $_POST['blood_pressure'];
     $respiratory_rate = $_POST['respiratory_rate'];
@@ -20,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $physical_examination = $_POST['physical_examination'];
     $diagnosis = $_POST['diagnosis'];
     $medication_treatment = $_POST['medication_treatment'];
-    $sql = "INSERT INTO emergency_room_patients (patient_case_no, patient_name, address, chief_complaint, mobile_no, history_of_present_illness, blood_pressure, respiratory_rate, capillary_refill, temperature, weight, pulse_rate, doctor_id, appointment_date, physical_examination, diagnosis, medication_treatment) VALUES ('$patient_case_no', '$patient_name', '$address', '$chief_complaint', '$mobile_no', '$history_of_present_illness', '$blood_pressure', '$respiratory_rate', '$capillary_refill', '$temperature', '$weight', '$pulse_rate', '$doctor_id', '$appointment_date', '$physical_examination', '$diagnosis', '$medication_treatment')";
+    $sql = "INSERT INTO emergency_room_patients (patient_case_no, chief_complaint, history_of_present_illness, blood_pressure, respiratory_rate, capillary_refill, temperature, weight, pulse_rate, doctor_id, appointment_date, physical_examination, diagnosis, medication_treatment) VALUES ('$patient_case_no', '$chief_complaint', '$history_of_present_illness', '$blood_pressure', '$respiratory_rate', '$capillary_refill', '$temperature', '$weight', '$pulse_rate', '$doctor_id', '$appointment_date', '$physical_examination', '$diagnosis', '$medication_treatment')";
     if ($qsql = mysqli_query($con, $sql)) {
         echo "<script>alert('Emergency room has been successfully created.');</script>";
         echo "<script>location.replace('admin_emergency_room.php');</script>";
@@ -56,26 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="patient_case_no">Patient Case Number <code>*</code></label>
-                                            <input type="text" class="form-control" id="patient_case_no" name="patient_case_no" placeholder="Patient Case Number" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
                                             <label for="patient_name">Patient Name <code>*</code></label>
-                                            <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="Patient Name" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <label for="address">Address <code>*</code></label>
-                                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+                                            <select name="patient_id" id="patient_id" class="form-control show-tick" required>
+                                                <option value="" selected>Select Value</option>
+                                                <?php
+                                                $sqlpatients = "SELECT patientid, patientname FROM patient WHERE status='Active'";
+                                                $qsqlpatients = mysqli_query($con, $sqlpatients);
+                                                while ($rspatients = mysqli_fetch_array($qsqlpatients)) {
+                                                    echo "<option value='$rspatients[patientid]' selected>$rspatients[patientname]</option>";
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -85,15 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                         <div class="form-line">
                                             <label for="chief_complaint">Chief Complaint <code>*</code></label>
                                             <input type="text" class="form-control" id="chief_complaint" name="chief_complaint" placeholder="Chief Complaint" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <label for="mobile_no">Mobile No. <code>*</code></label>
-                                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Mobile No." required>
                                         </div>
                                     </div>
                                 </div>
