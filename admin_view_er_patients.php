@@ -47,7 +47,9 @@ if (isset($_GET[delid])) {
                         <th width="10%">
                             <div align="center">Medication Treatment</div>
                         </th>
-                        
+                        <th width="10%">
+                            <div align="center">Action</div>
+                        </th>
                         <!-- <th width="17%">
                             <div align="center">Action</div>
                         </th> -->
@@ -71,9 +73,11 @@ if (isset($_GET[delid])) {
         
         <td align='center'>";
                         if (isset($_SESSION[adminid])) {
-                            echo "<a href='edit_opd_details.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-cyan'>Edit</a>
-                            <a href='admin_view_er_patients.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-blush2'>Delete</a>
-                            <a href='admin_print_OPD.php?patientid=$rs[patientid]' class='btn btn-sm btn-raised'>Print Report</a>";
+
+                            echo "<a href='edit_opd_details.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-blush2'>Edit</a>
+                            <!-- <a href='admin_view_er_patients.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-blush2'>Delete</a>
+                            <a href='admin_print_OPD.php?patientid=$rs[patientid]' class='btn btn-sm btn-raised'>Print Report</a> -->";
+                          
                         }
                         echo "</td></tr>";
                     }

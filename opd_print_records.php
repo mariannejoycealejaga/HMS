@@ -364,30 +364,27 @@ $tim = date("H:i:s");
                                     
                                     // print table header
                                     echo "<table>";
-                                    echo "<tr><th>Name</th><th>Address</th><th>Contact Number</th><th>Chief Complaint</th>
-                                    <th>Present Illness</th> <th>Blood Pressure</th> <th>Respiratory Rate</th> <th>Capillary Refill</th>
-                                    <th>Temp🌡️</th> <th>Weight</th> <th>Pulse Rate</th> <th>Physical Examination</th> <th>Diagnosis</th>
-                                    <th>Medication Treatment</th></tr>"; 
+                                    echo "<tr><tr><th>Name</th><th>Consultation Date</th><th>Diagnosis</th><th>Address</th>
+                                    <th>Contact No.</th> <th>History</th> <th>Physical Examinination</th> <th>Medical Treatment</th>
+                                    </tr>";   
                                     
                                     
                                     // fetch results and print each row
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr>" ;
-                                        echo "<td>" . $row['patient_name'] . "</td>";
-                                        echo "<td>" . $row['address'] . "</td>";
-                                        echo "<td>" . $row['contact_no'] . "</td>";
-                                        echo "<td>" . $row['chief_complaint'] . "</td>";
-                                        echo "<td>" . $row['present_illness'] . "</td>";
-                                        echo "<td>" . $row['blood_pressure'] . "</td>";
-                                        echo "<td>" . $row['respiratory_rate'] . "</td>";
-                                        echo "<td>" . $row['capillary_refill'] . "</td>";
-                                        echo "<td>" . $row['temperature'] . "</td>";
-                                        echo "<td>" . $row['weight'] . "</td>";
-                                        echo "<td>" . $row['pulse_rate'] . "</td>";
-                                        echo "<td>" . $row['physical_examination'] . "</td>";
-                                        echo "<td>" . $row['diagnosis'] . "</td>";
-                                        echo "<td>" . $row['medication_treatment'] . "</td>";
-                                        echo "</tr>";
+                                    $sql = "SELECT b.patientname, b.address, b.mobileno, a.id, a.appointment_date, a.diagnosis, a.history_of_present_illness, a.physical_examination, a.medication_treatment FROM emergency_room_patients a INNER JOIN patient b ON a.patient_case_no=b.patientid";
+                                    $qsql = mysqli_query($con, $sql);
+                                    while ($rs = mysqli_fetch_array($qsql)) {
+                                        echo "<tr>
+                                        <td>$rs[patientname]</td>
+                                        <td>$rs[appointment_date]</td>
+                                        <td>$rs[diagnosis]</td>
+                                        <td>$rs[address]</td>
+                                        <td>$rs[mobileno]</td>
+                                        <td>$rs[history_of_present_illness]</td>
+                                        <td>$rs[physical_examination]</td>
+                                        <td>$rs[medication_treatment]</td>
+                        
+                        
+                        <td align='center'>";
                                     }
                                     
                                     // close the statement and database connection

@@ -122,7 +122,7 @@ $tim = date("H:i:s");
                             <li><a href="viewpatient.php">View Patient Records</a></li>
                             <!-- <li><a href="patient_emergency_room.php">Add OPD Patients </a></li> -->
                             <li><a href="admin_emergency_room.php">Add OPD Patients </a></li>
-                            <li><a href="admin_view_er_patients.php">View ER Patient Records</a></li>
+                            <li><a href="admin_view_er_patients.php">View OutPatient Records</a></li>
                         </ul>
                     </li>
 

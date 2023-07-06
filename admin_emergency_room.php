@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-12">
                                     <div class="alert alert-info" role="alert">
                                         <h4 class="alert-heading">Note!</h4>
-                                        <p><code>*</code> fields are required.</p>
+                                        <p><code>*</code> fields are required. And in the vital signs, you can put only the numbers.</p>
                                         <hr>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="blood_pressure">Blood Pressure <code>*</code></label>
+                                            <label for="blood_pressure">Blood Pressure (120/80 mmHg)<code>*</code></label>
                                             <input type="text" class="form-control" id="blood_pressure" name="blood_pressure" placeholder="Blood Pressure" required>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="respiratory_rate">Respiratory Rate <code>*</code></label>
+                                            <label for="respiratory_rate">Respiratory Rate (12-20 breaths per minute)<code>*</code></label>
                                             <input type="text" class="form-control" id="respiratory_rate" name="respiratory_rate" placeholder="Respiratory Rate" required>
                                         </div>
                                     </div>
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="capillary_refill">Capillary Refill <code>*</code></label>
+                                            <label for="capillary_refill">Capillary Refill (2 sec)<code>*</code></label>
                                             <input type="text" class="form-control" id="capillary_refill" name="capillary_refill" placeholder="Capillary Refill" required>
                                         </div>
                                     </div>
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="temperature">Temperature (°C)<code>*</code></label>
+                                            <label for="temperature">Temperature (36.5°C)<code>*</code></label>
                                             <input type="text" class="form-control" id="temperature" name="temperature" placeholder="Temperature" required>
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="weight">Weight (KG)<code>*</code></label>
+                                            <label for="weight">Weight (50KG)<code>*</code></label>
                                             <input type="number" step="0.01" class="form-control" id="weight" name="weight" placeholder="Weight" required>
                                         </div>
                                     </div>
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="pulse_rate">Pulse Rate <code>*</code></label>
+                                            <label for="pulse_rate">Pulse Rate (60 BPM) <code>*</code></label>
                                             <input type="number" step="0.01" class="form-control" id="pulse_rate" name="pulse_rate" placeholder="Pulse Rate" required>
                                         </div>
                                     </div>

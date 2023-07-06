@@ -16,21 +16,21 @@
             <div class="row">
                 <div class="features">
 				   			 <form class=" wow fadeInDown" action="controller.php?action=delete" Method="POST">   			
-								<table id="dash-table" class="table table-striped table-bordered table-hover " style="font-size:12px" cellspacing="0">
+								<table id="dash-table" class="table table-striped table-bordered table-hover " style="font-size:14px" cellspacing="0">
 								
 								  <thead>
 								  	<tr>
 								  		<th> <!-- <input type="checkbox" name="chkall" id="chkall" onclick="return checkall('selector[]');"> --> IDNO</th>
 								  		<th>
 								  		
-								  		 Name</th>
-								  		<th>Sex</th> 
+								  		 NAME</th>
+								  		<th>SEX</th> 
 								  		<!-- <th>Age</th> -->
-								  		<th>Address</th>
-								  		<th>Contact No.</th>
-								  		<th>Position</th>
+								  		<th>ADDRESS</th>
+								  		<th>C0NTACT NO.</th>
+								  		<th>POSITION</th>
 								  		<!-- <th>Status</th> -->
-								  		<th width="14%" >Action</th>
+								  		<th width="14%" >ACTION</th>
 								 
 								  	</tr>	
 								  </thead> 

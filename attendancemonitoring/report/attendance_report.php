@@ -114,7 +114,7 @@ require_once '../../helpers/custom_field_helper.php';
                                 # code...
                                 ?>
                                 <table id="" class="table table-striped table-bordered table-hover "
-                                       style="font-size:12px"
+                                       style="font-size:14px"
                                        cellspacing="0">
 
                                     <thead>
@@ -128,12 +128,12 @@ require_once '../../helpers/custom_field_helper.php';
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th>Employee</th>
-                                        <th>Date</th>
-                                        <th width="150px">Time-In</th>
-                                        <th width="150px">Time-Out</th>
-                                        <th width="150px">Time-In</th>
-                                        <th width="150px">Time-Out</th>
+                                        <th width="100px">Employee</th>
+                                        <th width="100px">Date</th>
+                                        <th width="100px">Time-In</th>
+                                        <th width="100px">Time-Out</th>
+                                        <th width="100px">Time-In</th>
+                                        <th width="100px">Time-Out</th>
                                     </tr>
                                     </thead>
                                     <tbody>
