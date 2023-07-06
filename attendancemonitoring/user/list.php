@@ -15,16 +15,16 @@
                 <div class="features">
                 	<div class="wow fadeInDown">
 						<form action="controller.php?action=delete" Method="POST">   		
-						<table id="dash-table" class="table table-striped table-bordered table-hover table-responsive" style="font-size:12px" cellspacing="0">
+						<table id="dash-table" class="table table-striped table-bordered table-hover table-responsive" style="font-size:14px" cellspacing="0">
 
 						  <thead>
 						  	<tr>
 						  		<!-- <th>#</th> -->
 						  		<th>
 						  		 <!-- <input type="checkbox" name="chkall" id="chkall" onclick="return checkall('selector[]');">  -->
-						  		 Account Name</th>
-						  		<th>Username</th>
-						  		<th>Role</th>
+						  		ACCOUNT NAME</th>
+						  		<th>USEERNAME</th>
+						  		<th>ROLE</th>
 						  		<!-- <th width="10%" >Action</th> -->
 						 
 						  	</tr>	

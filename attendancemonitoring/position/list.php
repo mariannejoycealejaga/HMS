@@ -16,14 +16,14 @@
                 <div class="features">
 
 						  <form class="wow fadeInDown" action="controller.php?action=delete" Method="POST">   
-										<table id="dash-table" class="table table-striped table-bordered table-hover table-responsive" style="font-size:12px" cellspacing="0">
+										<table id="dash-table" class="table table-striped table-bordered table-hover table-responsive" style="font-size:14px" cellspacing="0">
 										
 										  <thead>
 										  	<tr> 
-										  		<th>Position</th>  
-										  		<th>Description</th>
-										  		<th width="">Department</th>
-										  		<th width="10%" >Action</th>
+										  		<th>POSITION</th>  
+										  		<th>DESCRIPTION</th>
+										  		<th width="">DEPARTMENT</th>
+										  		<th width="10%" >ACTION</th>
 										 
 										  	</tr>	
 										  </thead>     <!-- `POSITION_NAME`, `POSITION_LEVEL`, ``, `POSITION_DESC`, `DEPT_ID` -->

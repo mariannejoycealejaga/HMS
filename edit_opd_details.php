@@ -1,9 +1,22 @@
 <?php
-
 include("adheader.php");
 include("dbconnection.php");
+
+$current_record_id = intval($_GET['id']);
+
+$sql = "SELECT b.patientname, a.*, c.doctorname FROM emergency_room_patients a INNER JOIN patient b ON a.patient_case_no = b.patientid INNER JOIN doctor c ON c.doctorid=a.doctor_id WHERE a.id = $current_record_id";
+$qsql = mysqli_query($con, $sql);
+$info = mysqli_fetch_array($qsql);
+
+
+$sqldoctor = "SELECT * FROM doctor INNER JOIN department ON department.departmentid=doctor.departmentid  WHERE doctor.status='Active'";
+$qsqldoctor = mysqli_query($con, $sqldoctor);
+$doctors = [];
+while ($rsdoctor = mysqli_fetch_array($qsqldoctor)) {
+    array_push($doctors, $rsdoctor);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $patient_case_no = $_POST['patient_id'];
     $chief_complaint = $_POST['chief_complaint'];
     $history_of_present_illness = $_POST['history_of_present_illness'];
     $blood_pressure = $_POST['blood_pressure'];
@@ -17,28 +30,26 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $physical_examination = $_POST['physical_examination'];
     $diagnosis = $_POST['diagnosis'];
     $medication_treatment = $_POST['medication_treatment'];
-    $sql = "INSERT INTO emergency_room_patients (patient_case_no, chief_complaint, history_of_present_illness, blood_pressure, respiratory_rate, capillary_refill, temperature, weight, pulse_rate, doctor_id, appointment_date, physical_examination, diagnosis, medication_treatment) VALUES ('$patient_case_no', '$chief_complaint', '$history_of_present_illness', '$blood_pressure', '$respiratory_rate', '$capillary_refill', '$temperature', '$weight', '$pulse_rate', '$doctor_id', '$appointment_date', '$physical_examination', '$diagnosis', '$medication_treatment')";
+    $sql = "UPDATE emergency_room_patients SET chief_complaint='$chief_complaint', history_of_present_illness='$history_of_present_illness', blood_pressure='$blood_pressure', respiratory_rate='$respiratory_rate', capillary_refill='$capillary_refill', temperature='$temperature', weight='$weight', pulse_rate='$pulse_rate', doctor_id='$doctor_id', appointment_date='$appointment_date', physical_examination='$physical_examination', diagnosis='$diagnosis', medication_treatment='$medication_treatment' WHERE id = $current_record_id";
     if ($qsql = mysqli_query($con, $sql)) {
-        echo "<script>alert('Emergency room has been successfully created.');</script>";
-        echo "<script>location.replace('admin_emergency_room.php');</script>";
+        echo "<script>alert('Emergency room has been successfully updated!.');</script>";
+        echo "<script>location.replace('admin_view_er_patients.php');</script>";
     } else {
         echo mysqli_error($con);
     }
 }
 ?>
-
-
     <div class="container-fluid">
         <div class="block-header">
-            <h2>Emergency Room</h2>
+            <h2>Edit Patient Records</h2>
         </div>
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header">
-                        <h2>Patient Information </h2>
+                        <h2><?php echo $info['patientname']?> Patient Information </h2>
                     </div>
-                    <form method="post" action="<?= $_SERVER['PHP_SELF']; ?>">
+                    <form method="post">">
                         <input type="hidden" name="select2" value="Offline">
                         <div class="body">
                             <div class="row clearfix">
@@ -49,30 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                         <hr>
                                     </div>
                                 </div>
-
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <label for="patient_name">Patient Name <code>*</code></label>
-                                            <select name="patient_id" id="patient_id" class="form-control show-tick" required>
-                                                <option value="" selected>Select Value</option>
-                                                <?php
-                                                $sqlpatients = "SELECT patientid, patientname FROM patient WHERE status='Active'";
-                                                $qsqlpatients = mysqli_query($con, $sqlpatients);
-                                                while ($rspatients = mysqli_fetch_array($qsqlpatients)) {
-                                                    echo "<option value='$rspatients[patientid]' selected>$rspatients[patientname]</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="chief_complaint">Chief Complaint <code>*</code></label>
-                                            <input type="text" class="form-control" id="chief_complaint" name="chief_complaint" placeholder="Chief Complaint" required>
+                                            <input type="text" class="form-control" id="chief_complaint" name="chief_complaint" placeholder="Chief Complaint" value="<?php echo $info['chief_complaint'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="history_of_present_illness">History of Present Illness <code>*</code></label>
-                                            <input type="text" class="form-control" id="history_of_present_illness" name="history_of_present_illness" placeholder="History of Present Illness" required>
+                                            <input type="text" class="form-control" id="history_of_present_illness" name="history_of_present_illness" placeholder="History of Present Illness" value="<?php echo $info['history_of_present_illness'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -96,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="blood_pressure">Blood Pressure (120/80 mmHg)<code>*</code></label>
-                                            <input type="text" class="form-control" id="blood_pressure" name="blood_pressure" placeholder="Blood Pressure" required>
+                                            <label for="blood_pressure">Blood Pressure  (120/80 mmHg)<code>*</code></label>
+                                            <input type="text" class="form-control" id="blood_pressure" name="blood_pressure" placeholder="Blood Pressure" value="<?php echo $info['blood_pressure'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="respiratory_rate">Respiratory Rate (12-20 breaths per minute)<code>*</code></label>
-                                            <input type="text" class="form-control" id="respiratory_rate" name="respiratory_rate" placeholder="Respiratory Rate" required>
+                                            <input type="text" class="form-control" id="respiratory_rate" name="respiratory_rate" placeholder="Respiratory Rate" value="<?php echo $info['respiratory_rate'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="capillary_refill">Capillary Refill (2 sec)<code>*</code></label>
-                                            <input type="text" class="form-control" id="capillary_refill" name="capillary_refill" placeholder="Capillary Refill" required>
+                                            <input type="text" class="form-control" id="capillary_refill" name="capillary_refill" placeholder="Capillary Refill" value="<?php echo $info['capillary_refill'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="temperature">Temperature (36.5°C)<code>*</code></label>
-                                            <input type="text" class="form-control" id="temperature" name="temperature" placeholder="Temperature" required>
+                                            <input type="text" class="form-control" id="temperature" name="temperature" placeholder="Temperature" value="<?php echo $info['temperature'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="weight">Weight (50KG)<code>*</code></label>
-                                            <input type="number" step="0.01" class="form-control" id="weight" name="weight" placeholder="Weight" required>
+                                            <input type="number" step="0.01" class="form-control" id="weight" name="weight" placeholder="Weight" value="<?php echo $info['weight'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -139,8 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="pulse_rate">Pulse Rate (60 BPM) <code>*</code></label>
-                                            <input type="number" step="0.01" class="form-control" id="pulse_rate" name="pulse_rate" placeholder="Pulse Rate" required>
+                                            <label for="pulse_rate">Pulse Rate (60 BPM)<code>*</code></label>
+                                            <input type="number" step="0.01" class="form-control" id="pulse_rate" name="pulse_rate" placeholder="Pulse Rate" value="<?php echo $info['pulse_rate'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -150,16 +142,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                         <div class="form-line">
                                             <label for="doctor_id">Attending Physician <code>*</code></label>
                                             <select name="doctor_id" id="doctor_id" class="form-control show-tick" required>
-                                                <option value="" selected>Select Value</option>
+                                                <option value="<?php echo "$info[doctor_id]" ?>" selected>Select Value</option>
                                                 <?php
                                                 $sqldoctor = "SELECT * FROM doctor INNER JOIN department ON department.departmentid=doctor.departmentid WHERE doctor.status='Active'";
                                                 $qsqldoctor = mysqli_query($con, $sqldoctor);
-                                                while ($rsdoctor = mysqli_fetch_array($qsqldoctor)) {
-                                                    if ($rsdoctor[doctorid] == $rsedit[doctorid]) {
-                                                        echo "<option value='$rsdoctor[doctorid]' selected>$rsdoctor[doctorname] ( $rsdoctor[departmentname] ) </option>";
-                                                    } else {
-                                                        echo "<option value='$rsdoctor[doctorid]'>$rsdoctor[doctorname] ( $rsdoctor[departmentname] )</option>";
-                                                    }
+                                                foreach ($doctors as $doctor) {
+                                                        echo "<option value='$doctor[doctorid]'>$doctor[doctorname] ( $doctor[departmentname] )</option>";
                                                 }
                                                 ?>
                                             </select>
@@ -181,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="physical_examination">Physical Examination <code>*</code></label>
-                                            <textarea name="physical_examination" id="physical_examination" class="form-control no-resize" placeholder="Physical Examination"></textarea>
+                                            <textarea name="physical_examination" id="physical_examination" class="form-control no-resize" placeholder="Physical Examination"><?php echo $info['physical_examination'] ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="diagnosis">Diagnosis <code>*</code></label>
-                                            <textarea name="diagnosis" id="diagnosis" class="form-control no-resize" placeholder="Diagnosis"></textarea>
+                                            <textarea name="diagnosis" id="diagnosis" class="form-control no-resize" placeholder="Diagnosis"><?php echo $info['diagnosis'] ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -199,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="medication_treatment">Medication/Treatment <code>*</code></label>
-                                            <textarea name="medication_treatment" id="medication_treatment" class="form-control no-resize" placeholder="Medication/Treatment" required></textarea>
+                                            <textarea name="medication_treatment" id="medication_treatment" class="form-control no-resize" placeholder="Medication/Treatment"  required><?php echo $info['medication_treatment'] ?></textarea>
                                         </div>
                                     </div>
                                 </div>

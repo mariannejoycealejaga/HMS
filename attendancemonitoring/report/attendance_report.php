@@ -78,6 +78,17 @@ require_once '../../helpers/custom_field_helper.php';
                 <div class="row">
                     <button class="btn btn-primary" type="button" onclick="printDiv('employees_report');">Print</button>
                     <div class="search_panel pull-right">
+                        <label for="employee">Employee:</label>
+                        <select name="employee" id="employee" class="form-control show-tick">
+                            <option value="all" selected>ALL</option>
+                            <?php
+                            $mydb->setQuery("SELECT EmployeeID, concat(Lastname,', ',Firstname,' ',Middlename) AS `name` FROM tblemployee;");
+                            $employees = $mydb->loadResultList();
+                            foreach ($employees as $employee) {
+                                echo "<option value='$employee->EmployeeID'> $employee->name</option>";
+                            }
+                            ?>
+                        </select>
                         <label for="date_from">From:</label>
                         <input size="11" type="date" name="date_from" id="date_from"/>
                         <label for="to_date">To:</label>
@@ -103,7 +114,7 @@ require_once '../../helpers/custom_field_helper.php';
                                 # code...
                                 ?>
                                 <table id="" class="table table-striped table-bordered table-hover "
-                                       style="font-size:12px"
+                                       style="font-size:14px"
                                        cellspacing="0">
 
                                     <thead>
@@ -117,24 +128,23 @@ require_once '../../helpers/custom_field_helper.php';
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th>Employee</th>
-                                        <th>Date</th>
-                                        <th width="150px">Time-In</th>
-                                        <th width="150px">Time-Out</th>
-                                        <th width="150px">Time-In</th>
-                                        <th width="150px">Time-Out</th>
+                                        <th width="100px">Employee</th>
+                                        <th width="100px">Date</th>
+                                        <th width="100px">Time-In</th>
+                                        <th width="100px">Time-Out</th>
+                                        <th width="100px">Time-In</th>
+                                        <th width="100px">Time-Out</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
                                     //                                @$attenddate = date_format(date_create($_POST['attenddate']), 'Y-m-d');
+                                    @$employee_id = $_POST['employee'];
+                                    @$employee_selected = $_POST['employee'] == "all" ? "" : "AND a.EmployeeID = $employee_id";
                                     @$date_from = date_format(date_create($_POST['date_from']), 'Y-m-d');
                                     @$date_to = date_format(date_create($_POST['date_to']), 'Y-m-d');
 
-                                    //                      $mydb->setQuery("SELECT * FROM `tbltimetable` t, `tblemployee` e,`tblposition` p
-                                    //                               WHERE t.`EmployeeID`=e.`EmployeeID` AND e.`PositionID`=p.`PositionID`
-                                    //                               AND p.`PositionCode` ='{$_POST['Attendance']}' AND Date(`AttendDate`) ='{$attenddate}' AND `EmployeeStatus`='{$_POST['EmployeeStatus']}' ORDER BY TimeTableID desc");
-                                    $mydb->setQuery("SELECT * FROM tbltimetable a INNER JOIN tblemployee b ON a.EmployeeID = b.EmployeeID WHERE a.AttendDate >= '$date_from' AND a.AttendDate <= '$date_to' ORDER BY a.AttendDate DESC, a.TimeOutAM DESC, TimeOutPM DESC");
+                                    $mydb->setQuery("SELECT * FROM tbltimetable a INNER JOIN tblemployee b ON a.EmployeeID = b.EmployeeID WHERE a.AttendDate >= '$date_from' AND a.AttendDate <= '$date_to' $employee_selected ORDER BY a.AttendDate DESC, a.TimeOutAM DESC, TimeOutPM DESC");
 
                                     $cur = $mydb->loadResultList();
 

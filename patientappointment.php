@@ -189,7 +189,8 @@ if (isset($_SESSION[patientid])) {
                                                         <input placeholder="Password" type="password"
                                                                class="form-control"
                                                                name="password" id="password"
-                                                               value="<?php echo $rspatient[password]; ?>"
+                                                               value="<?php echo $rspatient[password]; 
+                                                               $hashed_password = password_hash($_POST[password], PASSWORD_DEFAULT);?>"
                                                             <?php echo $readonly; ?>><i class="icon-lock"></i>
                                                     </label>
 

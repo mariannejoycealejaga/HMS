@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="features">
 				   			 <form class=" " action="controller.php?action=delete" Method="POST">   			
-								<table id="dash-table" class="table table-striped table-bordered table-hover " style="font-size:12px" cellspacing="0">
+								<table id="dash-table" class="table table-striped table-bordered table-hover " style="font-size:14px" cellspacing="0">
 								
 								  <thead>
 								  <tr>
@@ -25,8 +25,8 @@
 								  	<th colspan="2"><center>PM</center></th> 
 								  </tr>
 								  	<tr>
-								   		<th>Employees</th>
-								  		<th>Date</th>
+								   		<th>EMPLOYEES</th>
+								  		<th>DATE</th>
 								  		<th width="150px">Time-In</th>  
 								  		<th width="150px">Time-Out</th>
 								  		<th width="150px">Time-In</th>  

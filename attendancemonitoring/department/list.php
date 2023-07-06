@@ -15,17 +15,17 @@
                 <div class="features">
  
 						<form class="wow fadeInDownaction" action="controller.php?action=delete" Method="POST">   		
-							<table id="dash-table" class="table table-striped table-bordered table-hover table-responsive" style="font-size:12px" cellspacing="0">
+							<table id="dash-table" class="table table-striped table-bordered table-hover table-responsive" style="font-size:14px" cellspacing="0">
 
 							  <thead>
 							  	<tr>
 							  		<th width="5%">
 							  		  ID</th>
 							  		 <th>
-							  		  Department</th>
-							  		<th>Description</th>
-									  <th>Status</th>
-							  	 	<th width="10%" >Action</th>
+							  		  DEPARTMENT</th>
+							  		<th>DESCRIPTION</th>
+									  <th>STATUS</th>
+							  	 	<th width="10%" >ACTION</th>
 							 
 							  	</tr>	
 							  </thead> 

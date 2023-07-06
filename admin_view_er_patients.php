@@ -47,7 +47,9 @@ if (isset($_GET[delid])) {
                         <th width="10%">
                             <div align="center">Medication Treatment</div>
                         </th>
-                        
+                        <th width="10%">
+                            <div align="center">Action</div>
+                        </th>
                         <!-- <th width="17%">
                             <div align="center">Action</div>
                         </th> -->
@@ -55,25 +57,25 @@ if (isset($_GET[delid])) {
                     </thead>
                     <tbody>
                     <?php
-                    $sql = "SELECT * FROM emergency_room_patients";
+                    $sql = "SELECT b.patientname, b.address, b.mobileno, a.id, a.appointment_date, a.diagnosis, a.history_of_present_illness, a.physical_examination, a.medication_treatment FROM emergency_room_patients a INNER JOIN patient b ON a.patient_case_no=b.patientid";
                     $qsql = mysqli_query($con, $sql);
                     while ($rs = mysqli_fetch_array($qsql)) {
                         echo "<tr>
-        <td>$rs[patient_name]</td>
-        <td>$rs[appointment_date]</td>
-        <td>$rs[diagnosis]</td>
-        <td>$rs[address]</td>
-        <td>$rs[contact_no]</td>
-        <td>$rs[present_illness]</td>
-        <td>$rs[physical_examination]</td>
-        <td>$rs[medication_treatment]</td>
+                        <td>$rs[patientname]</td>
+                        <td>$rs[appointment_date]</td>
+                        <td>$rs[diagnosis]</td>
+                        <td>$rs[address]</td>
+                        <td>$rs[mobileno]</td>
+                        <td>$rs[history_of_present_illness]</td>
+                        <td>$rs[physical_examination]</td>
+                        <td>$rs[medication_treatment]</td>
         
         
         <td align='center'>";
                         if (isset($_SESSION[adminid])) {
-                            echo "<a href='admin_emergency_room.php.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-cyan'>Edit</a>
-                            <a href='admin_view_er_patients.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-blush2'>Delete</a>
-                            <a href='admin_print_OPD.php?patientid=$rs[patientid]' class='btn btn-sm btn-raised'>Print Report</a>";
+                            echo "<a href='edit_opd_details.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-blush2'>Edit</a>
+                            <!-- <a href='admin_view_er_patients.php?id=$rs[id]' class='btn btn-sm btn-raised g-bg-blush2'>Delete</a>
+                            <a href='admin_print_OPD.php?patientid=$rs[patientid]' class='btn btn-sm btn-raised'>Print Report</a> -->";
                         }
                         echo "</td></tr>";
                     }
