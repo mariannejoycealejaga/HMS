@@ -30,7 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $physical_examination = $_POST['physical_examination'];
     $diagnosis = $_POST['diagnosis'];
     $medication_treatment = $_POST['medication_treatment'];
+
     $sql = "UPDATE emergency_room_patients SET chief_complaint='$chief_complaint', history_of_present_illness='$history_of_present_illness', blood_pressure='$blood_pressure', respiratory_rate='$respiratory_rate', capillary_refill='$capillary_refill', temperature='$temperature', weight='$weight', pulse_rate='$pulse_rate', doctor_id='$doctor_id', appointment_date='$appointment_date', physical_examination='$physical_examination', diagnosis='$diagnosis', medication_treatment='$medication_treatment' WHERE id = $current_record_id";
+  
     if ($qsql = mysqli_query($con, $sql)) {
         echo "<script>alert('Emergency room has been successfully updated!.');</script>";
         echo "<script>location.replace('admin_view_er_patients.php');</script>";
@@ -56,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-12">
                                     <div class="alert alert-info" role="alert">
                                         <h4 class="alert-heading">Note!</h4>
+
                                         <p><code>*</code> fields are required. And in the vital signs, you can put only the numbers.</p>
                                         <hr>
                                     </div>
@@ -88,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
+
                                             <label for="blood_pressure">Blood Pressure  (120/80 mmHg)<code>*</code></label>
                                             <input type="text" class="form-control" id="blood_pressure" name="blood_pressure" placeholder="Blood Pressure" value="<?php echo $info['blood_pressure'] ?>" required>
                                         </div>
@@ -96,7 +100,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
+
                                             <label for="respiratory_rate">Respiratory Rate (12-20 breaths per minute)<code>*</code></label>
+
                                             <input type="text" class="form-control" id="respiratory_rate" name="respiratory_rate" placeholder="Respiratory Rate" value="<?php echo $info['respiratory_rate'] ?>" required>
                                         </div>
                                     </div>
@@ -104,7 +110,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
+
                                             <label for="capillary_refill">Capillary Refill (2 sec)<code>*</code></label>
+                           
                                             <input type="text" class="form-control" id="capillary_refill" name="capillary_refill" placeholder="Capillary Refill" value="<?php echo $info['capillary_refill'] ?>" required>
                                         </div>
                                     </div>
@@ -113,7 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label for="temperature">Temperature (36.5°C)<code>*</code></label>
+
+                                            <label for="temperature">Temperature (36.5°C)<code>*</code></label>                                    
+
                                             <input type="text" class="form-control" id="temperature" name="temperature" placeholder="Temperature" value="<?php echo $info['temperature'] ?>" required>
                                         </div>
                                     </div>
@@ -122,7 +132,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
+                                          
                                             <label for="weight">Weight (50KG)<code>*</code></label>
+
+
                                             <input type="number" step="0.01" class="form-control" id="weight" name="weight" placeholder="Weight" value="<?php echo $info['weight'] ?>" required>
                                         </div>
                                     </div>
@@ -131,7 +144,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <div class="form-line">
+
                                             <label for="pulse_rate">Pulse Rate (60 BPM)<code>*</code></label>
+
                                             <input type="number" step="0.01" class="form-control" id="pulse_rate" name="pulse_rate" placeholder="Pulse Rate" value="<?php echo $info['pulse_rate'] ?>" required>
                                         </div>
                                     </div>
