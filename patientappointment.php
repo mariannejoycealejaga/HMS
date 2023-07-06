@@ -12,7 +12,8 @@ if (isset($_POST[submit])) {
             if (!$rowcount) {
                 $dt = date("Y-m-d");
                 $tim = date("H:i:s");
-                $sql = "INSERT INTO patient(patientname,admissiondate,admissiontime,address,city,mobileno,loginid,password,gender,dob,status) values('$_POST[patiente]','$dt','$tim','$_POST[textarea]','$_POST[city]','$_POST[mobileno]','$_POST[loginid]','$_POST[password]','$_POST[select6]','$_POST[dob]','Active')";
+                $hashed_password = password_hash($_POST[password], PASSWORD_DEFAULT);
+                $sql = "INSERT INTO patient(patientname,admissiondate,admissiontime,address,city,mobileno,loginid,password,gender,dob,status) values('$_POST[patiente]','$dt','$tim','$_POST[textarea]','$_POST[city]','$_POST[mobileno]','$_POST[loginid]','$hashed_password','$_POST[select6]','$_POST[dob]','Active')";
                 if ($qsql = mysqli_query($con, $sql)) {
                     $dt = date("Y-m-d");
                     $tim = date("H:i:s");
@@ -39,18 +40,6 @@ if (isset($_POST[submit])) {
 
     }
 
-//    $sqlappointment = "SELECT * FROM appointment WHERE appointmentdate='$_POST[appointmentdate]' AND appointmenttime='$_POST[appointmenttime]' AND doctorid='$_POST[doct]' AND status='Approved'";
-//    $qsqlappointment = mysqli_query($con, $sqlappointment);
-//    if (mysqli_num_rows($qsqlappointment) >= 1) {
-//        echo "<script>alert('Appointment Already Scheduled for This Time.');</script>";
-//    } else {
-//        $sql = "INSERT INTO appointment(appointmenttype,patientid,appointmentdate,appointmenttime,app_reason,status,departmentid,doctorid) values('ONLINE','$lastinsid','$_POST[appointmentdate]','$_POST[appointmenttime]','$_POST[app_reason]','Pending','$_POST[department]','$_POST[doct]')";
-//        if ($qsql = mysqli_query($con, $sql)) {
-//            echo "<script>alert('Appointment Record Inserted Successfully...');</script>";
-//        } else {
-//            echo mysqli_error($con);
-//        }
-//    }
 }
 if (isset($_GET[editid])) {
     $sql = "SELECT * FROM appointment WHERE appointmentid='$_GET[editid]' ";
@@ -189,8 +178,7 @@ if (isset($_SESSION[patientid])) {
                                                         <input placeholder="Password" type="password"
                                                                class="form-control"
                                                                name="password" id="password"
-                                                               value="<?php echo $rspatient[password]; 
-                                                               $hashed_password = password_hash($_POST[password], PASSWORD_DEFAULT);?>"
+                                                               value="<?php echo $rspatient[password]; ?>"
                                                             <?php echo $readonly; ?>><i class="icon-lock"></i>
                                                     </label>
 

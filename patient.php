@@ -17,7 +17,8 @@ if(isset($_POST[submit]))
 	}
 	else
 	{
-		$sql ="INSERT INTO patient(patientname,admissiondate,admissiontime,address,mobileno,city,pincode,loginid,password,bloodgroup,gender,dob,status) values('$_POST[patientname]','$dt','$tim','$_POST[address]','$_POST[mobilenumber]','$_POST[city]','$_POST[pincode]','$_POST[loginid]','$_POST[password]','$_POST[select2]','$_POST[select3]','$_POST[dateofbirth]','Active')";
+        $hashed_password = password_hash($_POST[password], PASSWORD_DEFAULT);
+		$sql ="INSERT INTO patient(patientname,admissiondate,admissiontime,address,mobileno,city,pincode,loginid,password,bloodgroup,gender,dob,status) values('$_POST[patientname]','$dt','$tim','$_POST[address]','$_POST[mobilenumber]','$_POST[city]','$_POST[pincode]','$_POST[loginid]','$hashed_password','$_POST[select2]','$_POST[select3]','$_POST[dateofbirth]','Active')";
 		if($qsql = mysqli_query($con,$sql))
 		{
 			echo "<script>alert('patients record inserted successfully...');</script>";
